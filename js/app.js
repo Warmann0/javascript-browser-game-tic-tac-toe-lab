@@ -29,4 +29,16 @@ const cells = document.querySelectorAll(".sqr");
 const message = document.querySelector("#message");
 
 /*-------------------------------- Functions --------------------------------*/
+function initializeGame() {
+    cells.forEach(cell => cell.addEventListener("click", cellClicked));
+    message.textContent = `${currentPlayer}'s turn`;
+    running = true;
+}
 
+function cellClicked() {
+    const cellIndex = this.id; // Get clicked cell's ID
+    if (board[cellIndex] !== "" || !running) return; // Ignore clicks on filled or inactive cells
+    
+    updateCell(this, cellIndex);
+    checkWinner();
+}
